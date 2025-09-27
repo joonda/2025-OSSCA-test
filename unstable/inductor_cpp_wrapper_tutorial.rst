@@ -5,12 +5,12 @@ Inductor C++ Wrapper Tutorial
 
 Prerequisites:
 ----------------
--  `torch.compile and TorchInductor concepts in PyTorch <https://tutorials.pytorch.kr/intermediate/torch_compile_tutorial.html>`__
+-  `torch.compile and TorchInductor concepts in PyTorch <https://pytorch.org/tutorials/intermediate/torch_compile_tutorial.html>`__
 
 Introduction
 ------------
 
-Python, as the primary interface of PyTorch, is easy to use and efficient for development and debugging.
+Python, as the primary interface of PyTorch, is easy to use and efficient for development and debugging. 
 The Inductor's default wrapper generates Python code to invoke generated kernels and external kernels.
 However, in deployments requiring high performance, Python, as an interpreted language, runs relatively slower compared to compiled languages.
 
@@ -38,7 +38,7 @@ Example code
 We will use the below frontend code as an example:
 
 .. code:: python
-
+    
     import torch
 
     def fn(x):
@@ -84,7 +84,7 @@ By turning on the C++ wrapper, the generated code for the ``call`` function beco
         def g(args):
             args_tensor = [arg if isinstance(arg, torch.Tensor) else torch.tensor(arg) for arg in args]
             constants_tensor = [constant0]
-            args_tensor.extend(constants_tensor)
+            args_tensor.extend(constants_tensor)                    
 
             return f(args_tensor)
         return g

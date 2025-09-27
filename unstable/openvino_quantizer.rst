@@ -5,8 +5,8 @@ PyTorch 2 Export Quantization for OpenVINO torch.compile Backend
 
 Prerequisites
 --------------
-- `PyTorch 2 Export Post Training Quantization <https://tutorials.pytorch.kr/prototype/pt2e_quant_ptq.html>`_
-- `How to Write a Quantizer for PyTorch 2 Export Quantization <https://tutorials.pytorch.kr/prototype/pt2e_quantizer.html>`_
+- `PyTorch 2 Export Post Training Quantization <https://pytorch.org/tutorials/prototype/pt2e_quant_ptq.html>`_
+- `How to Write a Quantizer for PyTorch 2 Export Quantization <https://pytorch.org/tutorials/prototype/pt2e_quantizer.html>`_
 
 Introduction
 --------------

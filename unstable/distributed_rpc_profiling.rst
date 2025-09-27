@@ -7,4 +7,4 @@ Redirecting to homepage...
 
 .. raw:: html
 
-   <meta http-equiv="Refresh" content="2; url='https://tutorials.pytorch.kr'" />
+   <meta http-equiv="Refresh" content="2; url='https://pytorch.org/tutorials'" />

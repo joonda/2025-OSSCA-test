@@ -3,7 +3,7 @@ Using Max-Autotune Compilation on CPU for Better Performance
 
 **Author**: `Jiong Gong <https://github.com/jgong5>`__, `Leslie Fang <https://github.com/leslie-fang-intel>`__, `Chunyuan Wu <https://github.com/chunyuan-w>`__
 
-In this tutorial, you will learn how to boost your PyTorch models' performance on CPU by
+In this tutorial, you will learn how to boost your PyTorch models' performance on CPU by 
 leveraging the max-autotune mode in the Inductor CPU backend. Explore the activation
 process, understand the differences from traditional methods, and integrate max-autotune
 into your code for enhanced computational efficiency. Dive into the use of advanced
@@ -11,7 +11,7 @@ GEMM templates for faster processing and superior runtime performance.
 
 Prerequisites:
 ----------------
--  `torch.compile and TorchInductor concepts in PyTorch <https://tutorials.pytorch.kr/intermediate/torch_compile_tutorial.html>`__
+-  `torch.compile and TorchInductor concepts in PyTorch <https://pytorch.org/tutorials/intermediate/torch_compile_tutorial.html>`__
 
 Introduction
 ------------
@@ -23,12 +23,12 @@ This is similar to the max-autotune mode on CUDA, where implementations from ATe
 
 We have covered most popular data types, including FP32, BF16, FP16, and INT8, with epilogue fusions for x86 CPUs.
 
-While the development is still in progress, we have already seen promising speedups over pure ATen-based GEMMs as measured by the three benchmark suites and the inference of LLMs.
+While the development is still in progress, we have already seen promising speedups over pure ATen-based GEMMs as measured by the three benchmark suites and the inference of LLMs. 
 
 Activating the ``max-autotune`` mode
 -------------------------------------
 To activate the ``max-autotune`` mode in PyTorch, set the ``mode`` argument to ``max-autotune`` when compiling your model using ``torch.compile``.
-If you prefer to bypass the tuning process and always use the C++ template implementations, you can configure this via an environment variable:
+If you prefer to bypass the tuning process and always use the C++ template implementations, you can configure this via an environment variable: 
 ``export TORCHINDUCTOR_MAX_AUTOTUNE_GEMM_BACKENDS=CPP``.
 
 
@@ -92,8 +92,8 @@ In this example, C++ template outperforms ATen kernel so that it will be selecte
 .. code:: shell
 
     AUTOTUNE linear_unary(64x16, 32x16, 32)
-    cpp_packed_gemm_0 0.2142 ms 100.0%
-    _linear_pointwise 0.2441 ms 87.7%
+    cpp_packed_gemm_0 0.2142 ms 100.0% 
+    _linear_pointwise 0.2441 ms 87.7% 
 
 
 We could check the generated output code by setting ``export TORCH_LOGS="+output_code"``.
@@ -106,7 +106,7 @@ The generated code differs by CPU architecture and is implementation-specific, w
 .. code:: python
 
     cpp_fused__to_copy_relu_1 = async_compile.cpp_pybinding(['const bfloat16*', 'const bfloat16*', 'const bfloat16*', 'bfloat16*'], '''
-
+    
     ...
 
     template <bool accum>
@@ -123,7 +123,7 @@ The generated code differs by CPU architecture and is implementation-specific, w
     ) {
         ...
     }
-
+    
     ...
 
     template <bool accum>
@@ -142,7 +142,7 @@ The generated code differs by CPU architecture and is implementation-specific, w
         ...
     }
 
-    extern "C"
+    extern "C" 
     void kernel(const bfloat16* X, const bfloat16* W, const bfloat16* inp, bfloat16* Y)
     {
         constexpr int64_t num_threads = 40;
@@ -193,7 +193,7 @@ The generated code differs by CPU architecture and is implementation-specific, w
                                     auto tmp8 = at::vec::convert<bfloat16>(tmp7);
                                     tmp8.store(Y + static_cast<int64_t>(n_start + x1 + (32L*m_start) + (32L*x0)), static_cast<int64_t>(16));
                                 }
-
+                                
                                 ...
 
                             }
